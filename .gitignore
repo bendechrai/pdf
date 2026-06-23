@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+docker-compose.override.yml
+.DS_Store
+*.log
+.vite/

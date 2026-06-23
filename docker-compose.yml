@@ -1,0 +1,18 @@
+services:
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile.webapp
+    container_name: pdf-webapp
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./webapp:/app
+      - /app/node_modules
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"fetch('http://localhost:5173/').then(r=>{if(!r.ok)throw r.status}).catch(()=>process.exit(1))\""]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s

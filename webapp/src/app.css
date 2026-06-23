@@ -1,0 +1,219 @@
+.drop-wrap {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+}
+
+.drop {
+  width: 100%;
+  max-width: 560px;
+  background: var(--panel);
+  border: 2px dashed var(--border);
+  border-radius: 16px;
+  padding: 56px 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.drop:hover {
+  border-color: var(--accent);
+}
+
+.drop--active {
+  border-color: var(--accent);
+  background: rgba(111, 140, 255, 0.06);
+  transform: scale(1.01);
+}
+
+.drop--loading {
+  cursor: progress;
+  opacity: 0.85;
+}
+
+.drop__icon {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+.drop__title {
+  margin: 0 0 8px;
+  font-size: 22px;
+  color: var(--text);
+}
+
+.drop__sub {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.drop__error {
+  margin-top: 16px;
+  color: var(--danger);
+  font-size: 14px;
+}
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bg);
+}
+
+.editor__bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 16px;
+  background: rgba(14, 15, 18, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.editor__bar-left,
+.editor__bar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.editor__file {
+  color: var(--text);
+  font-weight: 500;
+  max-width: 360px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.editor__meta {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.editor__zoom {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 4px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.editor__zoom button {
+  padding: 2px 8px;
+}
+
+.editor__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: 13px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  background: var(--panel-2);
+}
+
+.editor__toggle:hover {
+  color: var(--text);
+  border-color: #3a3e4a;
+}
+
+.editor__toggle input[type='checkbox'] {
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.editor__scroll {
+  flex: 1;
+  overflow: auto;
+  padding: 24px;
+}
+
+.editor__stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.pdf-page {
+  position: relative;
+  background: white;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.pdf-page__canvas {
+  display: block;
+}
+
+.pdf-page__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.pdf-text {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  background: transparent;
+  font: inherit;
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow: visible;
+  outline: none;
+  border-radius: 2px;
+  pointer-events: auto;
+  caret-color: var(--accent);
+  /* The canvas under us already paints the original text. Stay invisible at
+     rest so the on-screen render matches the original exactly; show our own
+     text only when this run is being edited or focused. */
+  color: transparent;
+  text-shadow: none;
+}
+
+.pdf-text:hover {
+  background: rgba(111, 140, 255, 0.08);
+  border-color: rgba(111, 140, 255, 0.4);
+}
+
+.pdf-text:focus,
+.pdf-text--edited {
+  background: white;
+  color: var(--text-color, black);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(111, 140, 255, 0.25);
+  z-index: 1;
+}
+
+.pdf-text--edited {
+  border-color: var(--success);
+  box-shadow: 0 0 0 2px rgba(98, 201, 139, 0.25);
+}
